@@ -44,7 +44,7 @@ var animations = [String: CAAnimation]()
     
     func loadAnimations () {
         // Load the character in the idle animation
-        let idleScene = SCNScene(named: "art.scnassets/idleFixed.dae")!
+        let idleScene = SCNScene(named: "art.scnassets/Idle.dae")!
         
         // This node will be parent of all the animation models
         let node = SCNNode()
