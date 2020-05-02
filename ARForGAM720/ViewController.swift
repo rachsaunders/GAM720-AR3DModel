@@ -1,18 +1,27 @@
 //
-//  ViewController.swift
+//  AppDelegate.swift
 //  ARForGAM720
 //
 //  Created by Rachel Saunders on 01/05/2020.
 //  Copyright © 2020 Rachel Saunders. All rights reserved.
 //
 
+
+// SceneKit needed for 3D scene, ARKit obviously for AR
 import UIKit
-import SpriteKit
+import SceneKit
 import ARKit
 
-class ViewController: UIViewController, ARSKViewDelegate {
+class ViewController: UIViewController, ARSCNViewDelegate {
     
-    @IBOutlet var sceneView: ARSKView!
+    // links up to scene view on storyboard
+    @IBOutlet var sceneView: ARSCNView!
+    
+    
+var animations = [String: CAAnimation]()
+    
+    // start off the animation idle
+    var idle:Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,14 +29,89 @@ class ViewController: UIViewController, ARSKViewDelegate {
         // Set the view's delegate
         sceneView.delegate = self
         
-        // Show statistics such as fps and node count
-        sceneView.showsFPS = true
-        sceneView.showsNodeCount = true
+        // Show statistics such as fps and timing information
+        sceneView.showsStatistics = true
         
-        // Load the SKScene from 'Scene.sks'
-        if let scene = SKScene(fileNamed: "Scene") {
-            sceneView.presentScene(scene)
+        // Create a new scene
+        let scene = SCNScene()
+        
+        // Set the scene to the view
+        sceneView.scene = scene
+        
+        // Load the DAE animations, func declared below
+        loadAnimations()
+    }
+    
+    func loadAnimations () {
+        // Load the character in the idle animation
+        let idleScene = SCNScene(named: "art.scnassets/idleFixed.dae")!
+        
+        // This node will be parent of all the animation models
+        let node = SCNNode()
+        
+        // Add all the child nodes to the parent node
+        for child in idleScene.rootNode.childNodes {
+            node.addChildNode(child)
         }
+        
+        // position of the node in AR
+        node.position = SCNVector3(0, -1, -2)
+        node.scale = SCNVector3(0.2, 0.2, 0.2)
+        
+        // Adds the node to the scene
+        sceneView.scene.rootNode.addChildNode(node)
+        
+        // Load the movement animation
+        loadAnimation(withKey: "dancing", sceneName: "art.scnassets/twist_danceFixed", animationIdentifier: "twist_danceFixed-1")
+    }
+    
+    
+    func loadAnimation(withKey: String, sceneName:String, animationIdentifier:String) {
+    
+        // Usual scene coding for dae files
+        let sceneURL = Bundle.main.url(forResource: sceneName, withExtension: "dae")
+        let sceneSource = SCNSceneSource(url: sceneURL!, options: nil)
+        
+        // animation properties, play once, fade in and out is to make it look less "choppy"
+        if let animationObject = sceneSource?.entryWithIdentifier(animationIdentifier, withClass: CAAnimation.self) {
+          
+            animationObject.repeatCount = 1
+            animationObject.fadeInDuration = CGFloat(1)
+            animationObject.fadeOutDuration = CGFloat(0.5)
+            
+            // Store the animation
+            animations[withKey] = animationObject
+        }
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let location = touches.first!.location(in: sceneView)
+        
+        // Let's test if a 3D Object was touch
+        var hitTestOptions = [SCNHitTestOption: Any]()
+        hitTestOptions[SCNHitTestOption.boundingBoxOnly] = true
+        
+        let hitResults: [SCNHitTestResult]  = sceneView.hitTest(location, options: hitTestOptions)
+        
+        if hitResults.first != nil {
+            if(idle) {
+                playAnimation(key: "dancing")
+            } else {
+                stopAnimation(key: "dancing")
+            }
+            idle = !idle
+            return
+        }
+    }
+    
+    func playAnimation(key: String) {
+        // Add the animation to start playing it right away
+        sceneView.scene.rootNode.addAnimation(animations[key]!, forKey: key)
+    }
+    
+    func stopAnimation(key: String) {
+        // Stop the animation with a smooth transition
+        sceneView.scene.rootNode.removeAnimation(forKey: key, blendOutDuration: CGFloat(0.5))
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -35,7 +119,7 @@ class ViewController: UIViewController, ARSKViewDelegate {
         
         // Create a session configuration
         let configuration = ARWorldTrackingConfiguration()
-
+        
         // Run the view's session
         sceneView.session.run(configuration)
     }
@@ -47,15 +131,12 @@ class ViewController: UIViewController, ARSKViewDelegate {
         sceneView.session.pause()
     }
     
-    // MARK: - ARSKViewDelegate
-    
-    func view(_ view: ARSKView, nodeFor anchor: ARAnchor) -> SKNode? {
-        // Create and configure a node for the anchor added to the view's session.
-        let labelNode = SKLabelNode(text: "👾")
-        labelNode.horizontalAlignmentMode = .center
-        labelNode.verticalAlignmentMode = .center
-        return labelNode;
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Release any cached data, images, etc that aren't in use.
     }
+
+    // MARK: - ARSCNViewDelegate
     
     func session(_ session: ARSession, didFailWithError error: Error) {
         // Present an error message to the user

@@ -7,9 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		183E8E0E245DB807004359AB /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 183E8E0D245DB806004359AB /* art.scnassets */; };
 		18D83436245C72F7005FD5A2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D83435245C72F7005FD5A2 /* AppDelegate.swift */; };
-		18D83438245C72F7005FD5A2 /* Scene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 18D83437245C72F7005FD5A2 /* Scene.sks */; };
-		18D8343A245C72F7005FD5A2 /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D83439245C72F7005FD5A2 /* Scene.swift */; };
 		18D8343C245C72F7005FD5A2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D8343B245C72F7005FD5A2 /* ViewController.swift */; };
 		18D8343F245C72F7005FD5A2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18D8343D245C72F7005FD5A2 /* Main.storyboard */; };
 		18D83441245C72F8005FD5A2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18D83440245C72F8005FD5A2 /* Assets.xcassets */; };
@@ -17,10 +16,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		183E8E0D245DB806004359AB /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		18D83432245C72F7005FD5A2 /* ARForGAM720.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARForGAM720.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18D83435245C72F7005FD5A2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		18D83437245C72F7005FD5A2 /* Scene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Scene.sks; sourceTree = "<group>"; };
-		18D83439245C72F7005FD5A2 /* Scene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scene.swift; sourceTree = "<group>"; };
 		18D8343B245C72F7005FD5A2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		18D8343E245C72F7005FD5A2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		18D83440245C72F8005FD5A2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -59,8 +57,7 @@
 			isa = PBXGroup;
 			children = (
 				18D83435245C72F7005FD5A2 /* AppDelegate.swift */,
-				18D83437245C72F7005FD5A2 /* Scene.sks */,
-				18D83439245C72F7005FD5A2 /* Scene.swift */,
+				183E8E0D245DB806004359AB /* art.scnassets */,
 				18D8343B245C72F7005FD5A2 /* ViewController.swift */,
 				18D8343D245C72F7005FD5A2 /* Main.storyboard */,
 				18D83440245C72F8005FD5A2 /* Assets.xcassets */,
@@ -128,8 +125,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				18D83438245C72F7005FD5A2 /* Scene.sks in Resources */,
 				18D83444245C72F8005FD5A2 /* LaunchScreen.storyboard in Resources */,
+				183E8E0E245DB807004359AB /* art.scnassets in Resources */,
 				18D83441245C72F8005FD5A2 /* Assets.xcassets in Resources */,
 				18D8343F245C72F7005FD5A2 /* Main.storyboard in Resources */,
 			);
@@ -143,7 +140,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				18D8343C245C72F7005FD5A2 /* ViewController.swift in Sources */,
-				18D8343A245C72F7005FD5A2 /* Scene.swift in Sources */,
 				18D83436245C72F7005FD5A2 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -291,13 +287,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CFMS5Y826S;
 				INFOPLIST_FILE = ARForGAM720/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.rachelsaunders.ARForGAM720;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -309,13 +306,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CFMS5Y826S;
 				INFOPLIST_FILE = ARForGAM720/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.rachelsaunders.ARForGAM720;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
