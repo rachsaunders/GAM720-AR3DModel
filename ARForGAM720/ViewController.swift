@@ -44,6 +44,7 @@ var animations = [String: CAAnimation]()
     
     func loadAnimations () {
         // Load the character in the idle animation
+        // Changed to the 3D model I rigged
         let idleScene = SCNScene(named: "art.scnassets/Idle.dae")!
         
         // This node will be parent of all the animation models
@@ -62,7 +63,9 @@ var animations = [String: CAAnimation]()
         sceneView.scene.rootNode.addChildNode(node)
         
         // Load the movement animation
-        loadAnimation(withKey: "dancing", sceneName: "art.scnassets/twist_danceFixed", animationIdentifier: "twist_danceFixed-1")
+    
+        // Changed to the 3D model I rigged
+        loadAnimation(withKey: "walking", sceneName: "art.scnassets/WalkingFixed", animationIdentifier: "WalkingFixed-1")
     }
     
     
@@ -95,9 +98,9 @@ var animations = [String: CAAnimation]()
         
         if hitResults.first != nil {
             if(idle) {
-                playAnimation(key: "dancing")
+                playAnimation(key: "walking")
             } else {
-                stopAnimation(key: "dancing")
+                stopAnimation(key: "walking")
             }
             idle = !idle
             return
