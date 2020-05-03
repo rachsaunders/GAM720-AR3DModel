@@ -56,8 +56,9 @@ var animations = [String: CAAnimation]()
         }
         
         // position of the node in AR
-        node.position = SCNVector3(0, -1, -2)
-        node.scale = SCNVector3(0.2, 0.2, 0.2)
+        node.position = SCNVector3(0, -1.5, -2)
+        // width, height, depth
+        node.scale = SCNVector3(0.3, 0.3, 0.3)
         
         // Adds the node to the scene
         sceneView.scene.rootNode.addChildNode(node)
@@ -77,11 +78,12 @@ var animations = [String: CAAnimation]()
         
         // animation properties, play once, fade in and out is to make it look less "choppy"
         if let animationObject = sceneSource?.entryWithIdentifier(animationIdentifier, withClass: CAAnimation.self) {
-          
+
+            // how many times he'll walk
             animationObject.repeatCount = 1
-            animationObject.fadeInDuration = CGFloat(1)
+            animationObject.fadeInDuration = CGFloat(0.05)
             animationObject.fadeOutDuration = CGFloat(0.5)
-            
+
             // Store the animation
             animations[withKey] = animationObject
         }
